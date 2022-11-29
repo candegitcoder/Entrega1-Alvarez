@@ -95,7 +95,7 @@ def familiaFormulario(request):
     return render(request, "MiFamilia/familiaFormulario.html", {"form":formulario})
 
 def busquedaFamiliar(request):
-    return render(request, "Appcoder/busquedaFamiliar.html")
+    return render(request, "MiFamilia/busquedaFamiliar.html")
 
 def buscar(request):
 
@@ -104,6 +104,6 @@ def buscar(request):
         edad=request.GET["edad"]
 
         cursos=Familiar.objects.filter(edad__icontains=edad)
-        return render(request,"Appcoder/resultadosBusqueda.html", {"edad":edad} )
+        return render(request,"MiFamilia/resultadosBusqueda.html", {"edad":edad} )
     else:
-        return render(request, "Appcoder/busquedaFamiliar.html", {"mensaje":"CHE! Ingresa una edad"})
+        return render(request, "MiFamilia/busquedaFamiliar.html", {"mensaje":"CHE! Ingresa una edad"})
