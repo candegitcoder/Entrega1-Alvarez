@@ -1,0 +1,22 @@
+{% extends "MiFamilia/padre.html" %} 
+
+{% load static %}
+
+{% block titulo %} 
+<h1 class="mb-5">Formulario de busqueda de familiar</h1>
+{% endblock %} 
+
+{% block contenido_que_cambia %} 
+
+<form action="{% url 'buscar' %}" method="GET"> 
+
+    <input type="number" name="edad" id="edad">
+
+    <input type="submit" value="Buscar">
+
+
+</form>
+{{ mensaje }}
+
+
+{% endblock %}

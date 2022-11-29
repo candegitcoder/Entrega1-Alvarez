@@ -1,0 +1,28 @@
+{% extends "MiFamilia/padre.html" %} 
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">RESULTADOS DE LA BUSQUEDA</h1>
+{% endblock %}
+
+
+
+{% block contenido_que_cambia %}
+
+{% if familiares %}
+<ul>
+    {% for familiar in familiares %}
+        <li>{{familiar.nombre}}</li>
+        <li>{{familiar.edad}}</li>
+        <br>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<p> NO hay familiares con esa edad!</p>
+
+{% endif %}
+
+{% endblock %}

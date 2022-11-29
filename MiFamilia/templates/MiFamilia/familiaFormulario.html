@@ -1,0 +1,23 @@
+{% extends "MiFamilia/padre.html" %} 
+
+{% load static %}
+
+{% block titulo %} 
+<h1 class="mb-5">Formulario de familia</h1>
+{% endblock %} 
+
+{% block contenido_que_cambia %} 
+<h1>FORMULARIO</h1>
+
+<form action="{% url 'familiaFormulario' %}" method="POST"> {% csrf_token %}
+
+<table>
+ {{ form.as_table }}
+
+
+</table>
+<input type="submit" value="ENVIAR FAMILIAR">
+
+</form>
+
+{% endblock %} 
