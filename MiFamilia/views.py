@@ -1,24 +1,29 @@
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Familiar, Hijos, Padres, Ciudad
 from MiFamilia.forms import FamiliarForm, HijoForm, PadresForm, CiudadForm
 # Create your views here.
 
-def familia(request):
-    familia1=Familiar(nombre="candela", edad=25)
-    familia2=Familiar(nombre="Laureano", edad=26)
-    familia3=Familiar(nombre="Marcelinho", edad=6)
-   
-    familia1.save()
-    familia2.save()
-    familia3.save()
-    cadena_Texto="Familia: "+familia1.nombre+" "+str(familia1.edad)+" "+familia2.nombre+" "+str(familia2.edad)+", "+familia3.nombre+" "+str(familia3.edad)
- 
-
-    return HttpResponse(cadena_Texto)
-
 def inicio(request):
     return render (request, "MiFamilia/inicio.html")
+
+def familiar(request):
+
+        if request.method=="POST":
+            form=FamiliarForm(request.POST)
+            if form.is_valid():
+                informacion=form.cleaned_data
+                print(informacion)
+                nombre=informacion["nombre"]
+                edad=informacion["edad"]
+                familiar=Familiar(nombre=nombre, edad=edad)
+                familiar.save()
+                return render (request, 'MiFamilia/familiar.html', {"mensaje": "Familiar agregado correctamente"})
+        else:
+            formulario=FamiliarForm()
+  
+        return render (request, "MiFamilia/familiar.html", {"form":formulario})
 
 def ciudad(request):
 
@@ -99,11 +104,11 @@ def busquedaFamiliar(request):
 
 def buscar(request):
 
-    if request.GET["edad"]:
+    if request.GET["nombre"]:
 
-        edad=request.GET["edad"]
+        nombre=request.GET["nombre"]
 
-        cursos=Familiar.objects.filter(edad__icontains=edad)
-        return render(request,"MiFamilia/resultadosBusqueda.html", {"edad":edad} )
+        cursos=Familiar.objects.filter(nombre__icontains=nombre)
+        return render(request,"MiFamilia/resultadosBusqueda.html", {"nombre":nombre} )
     else:
-        return render(request, "MiFamilia/busquedaFamiliar.html", {"mensaje":"CHE! Ingresa una edad"})
+        return render(request, "MiFamilia/busquedaFamiliar.html", {"mensaje":"CHE! Ingresa un nombre"})

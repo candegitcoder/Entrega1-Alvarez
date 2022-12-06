@@ -19,6 +19,5 @@ from MiFamilia.views import*
 
 urlpatterns = [
     path('admin/', admin.site.urls),  
-    path("MiFamilia/", include("MiFamilia.urls")),
-    
+    path("", include("MiFamilia.urls")),    
 ]
